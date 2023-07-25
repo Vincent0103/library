@@ -1,0 +1,148 @@
+* {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  background-color: #a26f3b;
+  padding: 20px;
+  height: 100vh;
+}
+
+svg {
+  height: 40px;
+  width: 40px;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, .15);
+  padding: 10px 20px;
+}
+
+::selection {
+  background-color: #e9b27a;
+}
+
+.books-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.cards {
+  position: relative;
+  background-color: #faedcd;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, .15);
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.cards > * {
+  margin: 10px 0;
+}
+
+.remove-book-btn {
+  position: absolute;
+  padding: 5px 10px;
+  right: 10px;
+  top: 0px;
+  color: white;
+  background-image: linear-gradient(rgb(75, 75, 75), rgb(49, 49, 49));
+  border: 1px solid black;
+}
+
+.new-book-btn {
+  border: 1px solid #92987d;
+  background-color: #ccd5ae;
+  margin-left: 10px;
+  color: #000000;
+}
+
+.form-container {
+  position: relative;
+  display: none;
+  background-image: linear-gradient(#ffe39e, #ffe49ea0);
+  padding: 20px;
+  padding-top: 60px;
+  border-radius: 10px;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, .15),
+  inset 0 0 5px rgba(0, 0, 0, .15);
+  margin-bottom: 20%;
+  border: 5px solid #262626;
+}
+
+.form-container > *:not(.form-checkbox) {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-container > * > label {
+  font-weight: 500;
+}
+
+.form-inputs > input {
+  border: .5px solid #a26f3b;
+  border-radius: 3px;
+  height: 20px;
+}
+
+.form-inputs > input:focus {
+  outline: none;
+  border: 2px solid #a26f3b;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+}
+
+.form-checkbox {
+  accent-color: #a26f3b;
+}
+
+.form-container > button[type="submit"] {
+  margin-top: 30px;
+  margin-bottom: 0px;
+  border: 1px solid #5e3b17;
+  background-color: #7b4d1e;
+  color: white;
+  text-shadow:
+  -1px -1px 0 rgba(0, 0, 0, .15),
+   0   -1px 0 rgba(0, 0, 0, .15),
+   1px -1px 0 rgba(0, 0, 0, .15),
+   1px  0   0 rgba(0, 0, 0, .15),
+   1px  1px 0 rgba(0, 0, 0, .15),
+   0    1px 0 rgba(0, 0, 0, .15),
+  -1px  1px 0 rgba(0, 0, 0, .15),
+  -1px  0   0 rgba(0, 0, 0, .15);
+}
+
+.close-form-btn {
+  position: absolute;
+  top: -30px;
+  right: 20px;
+  color: white;
+  background-image: linear-gradient(rgb(62, 62, 62), rgb(15, 15, 15));
+  border: 1px solid black;
+  border-radius: 7px;
+}
+
+.form-inputs,
+.form-checkbox {
+  position: relative;
+}
+
+input:required + span::after {
+  position: absolute;
+  content: "required";
+  font-size: .8rem;
+  top: -10px;
+  right: 0px;
+  background-image: linear-gradient(rgb(62, 62, 62), rgb(15, 15, 15));
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, .15);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
