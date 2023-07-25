@@ -33,12 +33,24 @@ button {
 
 .cards {
   position: relative;
-  background-color: #faedcd;
+  background-image: linear-gradient(#faedcd, #e9c876);
   box-shadow: 1px 3px 5px rgba(0, 0, 0, .15);
   padding: 10px;
   padding-left: 20px;
   border-radius: 10px;
   margin: 20px 0;
+}
+
+.cards > h2 {
+  text-shadow:
+  -.3px -.3px 0 rgba(0, 0, 0, .15),
+  0px -.3px 0 rgba(0, 0, 0, .15),
+  .3px -.3px 0 rgba(0, 0, 0, .15),
+  .3px 0px 0 rgba(0, 0, 0, .15),
+  .3px .3px 0 rgba(0, 0, 0, .15),
+  0px .3px 0 rgba(0, 0, 0, .15),
+  -.3px .3px 0 rgba(0, 0, 0, .15),
+  -.3px 0px 0 rgba(0, 0, 0, .15);
 }
 
 .cards > * {

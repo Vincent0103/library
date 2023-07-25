@@ -18,10 +18,6 @@ function addBookToLibrary(title, author, pages, isRead) {
   myLibrary.push(new Book(title, author, pages, isRead));
 }
 
-function removeBookFromLibrary(book, index) {
-  myLibrary.splice();
-}
-
 function createRemoveBookBtn() {
   const removeBookBtn = document.createElement("button");
   removeBookBtn.textContent = "✖";
@@ -29,9 +25,17 @@ function createRemoveBookBtn() {
   return removeBookBtn;
 }
 
-/* removeBookBtns as a parameter in order to be able to store the btns in an array
-  and listen for each btn whenever an user clicks on it via the listenCloseBookBtnClick
-  function */
+function removeBook(removeBookBtns) {
+  removeBookBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = btn.parentElement;
+      const bookIndex = card.getAttribute("data-book-index");
+      myLibrary.splice(parseInt(bookIndex));
+      card.remove();
+    })
+  })
+}
+
 function displayBooks(container, removeBookBtns) {
   while (container.hasChildNodes()) {
     container.removeChild(container.firstChild);
@@ -73,23 +77,18 @@ function displayBooks(container, removeBookBtns) {
   }
 }
 
-function listenCloseBookBtnClick(removeBookBtns) {
-  removeBookBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-
-    })
-  })
-}
-
 window.addEventListener("DOMContentLoaded", () => {
   let removeBookBtns = [];
   const container = document.querySelector(".books-container");
   displayBooks(container, removeBookBtns);
+
   console.log(removeBookBtns);
   const newBookFormBtn = document.querySelector(".new-book-btn");
   const closeFormBtn = document.querySelector(".close-form-btn");
   const addBookFormBtn = document.querySelector(".add-book-form-btn");
   const form = document.querySelector(".form-container");
+
+  removeBook(removeBookBtns);
 
   newBookFormBtn.addEventListener("click", () => {
     form.style.display = "block";
@@ -111,6 +110,7 @@ window.addEventListener("DOMContentLoaded", () => {
       form.style.display = "none";
       displayBooks(container, removeBookBtns);
       console.log(removeBookBtns);
+      removeBook(removeBookBtns);
     }
   })
 
