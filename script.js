@@ -36,13 +36,17 @@ function removeBook(removeBookBtns) {
   })
 }
 
-function displayBooks(container, removeBookBtns) {
+function displayBooks(container, removeBookBtns, readBtns) {
   while (container.hasChildNodes()) {
     container.removeChild(container.firstChild);
   }
 
   while (removeBookBtns.length > 0) {
     removeBookBtns.pop();
+  }
+
+  while (readBtns.length > 0) {
+    readBtns.pop();
   }
 
   for (let i = 0; i < myLibrary.length; i++) {
@@ -55,6 +59,7 @@ function displayBooks(container, removeBookBtns) {
     card.appendChild(title);
 
     const author = document.createElement("small");
+    author.classList.add("author-field");
     author.innerHTML = `by <span>${myLibrary[i].author}</span>`;
     card.appendChild(author);
 
@@ -62,12 +67,20 @@ function displayBooks(container, removeBookBtns) {
     pages.innerHTML = `<span>${myLibrary[i].pages}</span> pages`;
     card.appendChild(pages);
 
-    // display a svg image depending on the book isRead property
+    const readBtn = document.createElement("button");
+
+    // display a button depending on the book isRead property
     if (myLibrary[i].isRead) {
-      card.innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M9.47 9.65L8.06 11.07L11 14L16.19 8.82L14.78 7.4L11 11.18M17 3H7C5.9 3 5 3.9 5 5L5 21L12 18L19 21V5C19 3.9 18.1 3 17 3M17 18L12 15.82L7 18V5H17Z\" /></svg>";
+      readBtn.classList.add("read-btn");
+      readBtn.textContent = "read ✔";
     } else {
-      card.innerHTML += "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M9,11V9H15V11H9M19,5V21L12,18L5,21V5C5,3.89 5.9,3 7,3H17C18.11,3 19,3.9 19,5M17,5H7V18L12,15.82L17,18V5Z\" /></svg>"
+      readBtn.classList.add("not-read-btn");
+      readBtn.textContent = "not read ✖";
     }
+
+    card.appendChild(readBtn);
+    readBtns.push(readBtn);
+
 
     const removeBookBtn = createRemoveBookBtn();
     removeBookBtns.push(removeBookBtn);
@@ -77,18 +90,43 @@ function displayBooks(container, removeBookBtns) {
   }
 }
 
+function toggleBookReadStatus(readBtns) {
+  readBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = btn.parentElement;
+      const selectedBook = myLibrary[card.getAttribute("data-book-index")];
+
+      if (btn.classList.contains("not-read-btn")) {
+        selectedBook.isRead = true;
+        btn.classList.remove("not-read-btn");
+        btn.classList.add("read-btn");
+        btn.textContent = "read ✔";
+
+      } else {
+        selectedBook.isRead = false;
+        btn.classList.remove("read-btn");
+        btn.classList.add("not-read-btn");
+        btn.textContent = "not read ✖";
+      }
+    })
+  })
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   let removeBookBtns = [];
-  const container = document.querySelector(".books-container");
-  displayBooks(container, removeBookBtns);
+  let readBtns = [];
 
-  console.log(removeBookBtns);
+  const container = document.querySelector(".books-container");
+  displayBooks(container, removeBookBtns, readBtns);
+
   const newBookFormBtn = document.querySelector(".new-book-btn");
   const closeFormBtn = document.querySelector(".close-form-btn");
   const addBookFormBtn = document.querySelector(".add-book-form-btn");
+  // let readBtns = document.querySelectorAll(".read-btn, .not-read-btn");
   const form = document.querySelector(".form-container");
 
   removeBook(removeBookBtns);
+  toggleBookReadStatus(readBtns);
 
   newBookFormBtn.addEventListener("click", () => {
     form.style.display = "block";
@@ -108,12 +146,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
       addBookToLibrary(title, author, pages, isRead.checked);
       form.style.display = "none";
-      displayBooks(container, removeBookBtns);
-      console.log(removeBookBtns);
+      displayBooks(container, removeBookBtns, readBtns);
+
       removeBook(removeBookBtns);
+      toggleBookReadStatus(readBtns);
     }
   })
 
-
 })
-addBookToLibrary("Jujutsu Kaisen", "Gege Akutami", "1k+", false);
+
+addBookToLibrary("Jujutsu Kaisen", "Gege Akutami", "1k+", true);

@@ -158,3 +158,22 @@ input:required + span::after {
   padding: 5px 10px;
   border-radius: 5px;
 }
+
+.author-field {
+  color: rgb(80, 80, 80);
+}
+
+.read-btn {
+  background-color: red;
+  background-color: #e0c57f;
+  border: 1px solid #a08b55;
+  padding: 5px 10px;
+  box-shadow: none;
+}
+
+.not-read-btn {
+  background-color: #a38e5a;
+  border: 1px solid #786942;
+  padding: 5px 10px;
+  box-shadow: none;
+}
