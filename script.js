@@ -37,6 +37,8 @@ function removeBook(removeBookBtns) {
 }
 
 function displayBooks(container, removeBookBtns, readBtns) {
+
+  // reload all the books card container
   while (container.hasChildNodes()) {
     container.removeChild(container.firstChild);
   }
@@ -60,7 +62,12 @@ function displayBooks(container, removeBookBtns, readBtns) {
 
     const author = document.createElement("small");
     author.classList.add("author-field");
-    author.innerHTML = `by <span>${myLibrary[i].author}</span>`;
+
+    if (myLibrary[i].author) {
+      author.innerHTML = `by <span>${myLibrary[i].author}</span>`;
+    } else {
+      author.innerHTML = `by <span> unknown</span>`;
+    }
     card.appendChild(author);
 
     const pages = document.createElement("p");
@@ -122,7 +129,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const newBookFormBtn = document.querySelector(".new-book-btn");
   const closeFormBtn = document.querySelector(".close-form-btn");
   const addBookFormBtn = document.querySelector(".add-book-form-btn");
-  // let readBtns = document.querySelectorAll(".read-btn, .not-read-btn");
   const form = document.querySelector(".form-container");
 
   removeBook(removeBookBtns);
@@ -155,4 +161,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
 })
 
-addBookToLibrary("Jujutsu Kaisen", "Gege Akutami", "1k+", true);
+addBookToLibrary("Jujutsu Kaisen", "Gege Akutami", "1237", true);
+addBookToLibrary("Kimetsu no yaiba", "Koyoharu Gotōge", "2634", false);
+addBookToLibrary("One Piece", "Eiichirō Oda", "5609", false);
