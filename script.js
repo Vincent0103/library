@@ -119,6 +119,15 @@ function toggleBookReadStatus(readBtns) {
   })
 }
 
+function checkAuthorValidity(element) {
+  if (element.validity.patternMismatch) {
+    console.log(element.value);
+    element.setCustomValidity('Invalid author field! Correct format: "name" or "firstname lastname" eg: "Mary Roisin"');
+  } else {
+    element.setCustomValidity('');
+  }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
   let removeBookBtns = [];
   let readBtns = [];
@@ -136,6 +145,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
   newBookFormBtn.addEventListener("click", () => {
     form.style.display = "block";
+    const authorInputField = form.querySelector('#author');
+    authorInputField.addEventListener('input', () => {
+      checkAuthorValidity(authorInputField);
+    })
   })
 
   closeFormBtn.addEventListener("click", () => {

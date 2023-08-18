@@ -20,7 +20,8 @@
     </div>
     <div class="form-inputs input-author">
       <label for="author">Author</label>
-      <input type="text" name="author" id="author" max-length="64">
+      <input type="text" name="author" id="author" max-length="64" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$" required>
+      <span></span>
     </div>
     <div class="form-inputs input-pages">
       <label for="pages">Pages</label>
